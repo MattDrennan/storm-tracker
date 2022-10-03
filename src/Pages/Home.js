@@ -61,8 +61,9 @@ function Home(props) {
     /**
      * Create marker
      */
-    const createMarker = (text, image, lat, lng) => {
+    const createMarker = (date, text, image, lat, lng) => {
         setMarkers([...markers, {
+            date: date,
             text: text,
             image: image,
             lat: lat,

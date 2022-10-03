@@ -1,16 +1,23 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import moment from 'moment';
+import DateTimePicker from 'react-datetime-picker';
 
 function DamageForm(props) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
+
+    /**
+     * Datetimepicker const
+     */
+    const [value, onChange] = useState(new Date());
 
     /**
      * Handle Damage Form Submit
      */
     const damageSubmit = (e) => {
-        console.log(e);
-        props.createMarker(e.damageName, e.iconPick, props.savedCoordinates.lat, props.savedCoordinates.lng);
+        console.log(moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"));
+        props.createMarker(moment(new Date(value)).format("YYYY-MM-DD HH:MM:ss"), e.damageName, e.iconPick, props.savedCoordinates.lat, props.savedCoordinates.lng);
         props.setShowDamageForm(false);
     };
 
@@ -30,7 +37,7 @@ function DamageForm(props) {
 
                     array.push((
                         <div key={i}>
-                            <input type="radio" value={response.data.result[i].file} {...register("iconPick", { required: "Please pick an icon."})} />
+                            <input type="radio" value={response.data.result[i].file} {...register("iconPick", { required: "Please pick an icon." })} />
                             <img src={"./images/" + response.data.result[i].file}></img>
                         </div>
                     ));
@@ -51,13 +58,29 @@ function DamageForm(props) {
     /**
      * On page load
     */
-     useEffect(() => {
+    useEffect(() => {
         loadIcons();
     }, []);
 
     return (
         <div>
             <form method="POST" onSubmit={handleSubmit(damageSubmit)}>
+                Date:
+                <Controller
+                    control={control}
+                    name="date"
+                    rules={{ required: "Please enter a date." }}
+                    defaultValue={new Date()}
+                    render={() => (
+                        <DateTimePicker
+                            onChange={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+
+                {errors.date && <span role="form-error">{errors.date.message}</span>}
+
                 Damage Name: <input type="text" maxLength="20" {...register("damageName", { required: "Please enter the type of damage.", maxLength: { value: 20, message: "Too many characters." } })} />
 
                 {errors.damageName && <span role="form-error">{errors.damageName.message}</span>}
