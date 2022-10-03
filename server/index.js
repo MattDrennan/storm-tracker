@@ -97,6 +97,21 @@ const verifyJWT = (req, res, next) => {
 }
 
 /**
+ * Get icons that can be used
+*/
+app.get("/geticons", (req, res) => {
+    let sql = 'SELECT * FROM icons';
+    let query = conn.query(sql, (err, results) => {
+        if (err) throw err;
+        if (results.length > 0) {
+            res.json({ 'success': true, 'result': results });
+        } else {
+            res.json({ 'success': true, 'result': false });
+        }
+    });
+});
+
+/**
 * Logs in the user
 */
 app.post("/login", (req, res) => {
