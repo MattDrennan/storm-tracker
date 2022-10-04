@@ -1,9 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import Axios from "axios";
 import moment from 'moment';
 import DateTimePicker from 'react-datetime-picker';
+import Map from "./Modules/Map";
 
 function Search(props) {
     const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -25,7 +25,8 @@ function Search(props) {
 
     const submitSearch = (e) => {
         setSearchResults([]);
-        
+        props.setMarkers([]);
+
         Axios.get("search", {
             params: {
                 dateStart: moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"),
@@ -38,7 +39,6 @@ function Search(props) {
             }
         }).then((response) => {
             if (response.data.result) {
-                console.log(response);
                 for (let i = 0; i <= response.data.result.length - 1; i++) {
                     let object = {
                         id: response.data.result[i].id,
@@ -50,6 +50,8 @@ function Search(props) {
                     };
 
                     setSearchResults(searchResults => [...searchResults, object]);
+
+                    props.createMarker(response.data.result[i].id, response.data.result[i].date, response.data.result[i].damageName, response.data.result[i].image, response.data.result[i].lat, response.data.result[i].lng);
                 }
             }
         });
@@ -99,6 +101,9 @@ function Search(props) {
                 <input type="submit" value="Search!" />
             </form>
 
+            <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+
+            {props.markerInfo}
 
             {searchResults.map(function (object, i) {
                 return <div key={object.id}>
