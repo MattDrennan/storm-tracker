@@ -16,7 +16,18 @@ function DamageForm(props) {
      * Handle Damage Form Submit
      */
     const damageSubmit = (e) => {
-        console.log(moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"));
+        // Insert marker into database
+        Axios.post("marker", {
+            date: moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"),
+            damageName: e.damageName,
+            image: e.iconPick,
+            comments: e.comments,
+            lat: props.savedCoordinates.lat,
+            lng: props.savedCoordinates.lng,
+        }).then((response) => {
+            console.log(response);
+        });
+
         props.createMarker(moment(new Date(value)).format("YYYY-MM-DD HH:MM:ss"), e.damageName, e.iconPick, props.savedCoordinates.lat, props.savedCoordinates.lng);
         props.setShowDamageForm(false);
     };
@@ -84,6 +95,8 @@ function DamageForm(props) {
                 Damage Name: <input type="text" maxLength="20" {...register("damageName", { required: "Please enter the type of damage.", maxLength: { value: 20, message: "Too many characters." } })} />
 
                 {errors.damageName && <span role="form-error">{errors.damageName.message}</span>}
+
+                Damage Comments (Optional): <textarea {...register("comments")}></textarea>
 
                 Icon:
 

@@ -17,9 +17,16 @@ function Home(props) {
     const location = useLocation();
 
     /**
+     * Marker Click Event
+     */
+    const clickMarker = (e) => {
+        console.log("aa");
+    };
+
+    /**
      * Make markers on map
      */
-    const Marker = ({ text, image }) => <div><img src={"./images/" + image} />{text}</div>;
+    const Marker = ({ text, image }) => <div onClick={clickMarker}><img src={"./images/" + image} />{text}</div>;
 
     /**
      * Change coordinates of the map
@@ -62,23 +69,37 @@ function Home(props) {
      * Create marker
      */
     const createMarker = (date, text, image, lat, lng) => {
-        setMarkers([...markers, {
+        let object = {
             date: date,
             text: text,
             image: image,
             lat: lat,
             lng: lng,
-        }]);
+        };
 
-        console.log(markers);
+        // Object into array
+        setMarkers(markers => [...markers, object]);
     };
 
     /**
-     * Track markers
-    */
+     * Load markers from server
+     */
+    const loadMarkers = () => {
+        Axios.get("markers").then((response) => {
+            if (response.data.result) {
+                for (let i = 0; i <= response.data.result.length - 1; i++) {
+                    createMarker(response.data.result[i].date, response.data.result[i].damageName, response.data.result[i].image, response.data.result[i].lat, response.data.result[i].lng);
+                }
+            }
+        });
+    };
+
+    /**
+       * On page load
+      */
     useEffect(() => {
-        console.log(markers);
-    }, [markers]);
+        loadMarkers();
+    }, []);
 
     return (
         <div>
@@ -96,7 +117,6 @@ function Home(props) {
                             lat: e.lat,
                             lng: e.lng,
                         });
-                        console.log(e);
                     }}>
 
                     {markers.map(function (object, i) {
