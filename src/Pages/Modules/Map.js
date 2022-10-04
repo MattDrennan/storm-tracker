@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from 'google-map-react';
-import { useGeolocated } from "react-geolocated";
 
 function Map(props) {
     const { register, handleSubmit, formState: { errors } } = useForm();
