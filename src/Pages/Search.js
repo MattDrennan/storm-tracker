@@ -1,5 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import moment from 'moment';
 import DateTimePicker from 'react-datetime-picker';
@@ -56,6 +56,13 @@ function Search(props) {
             }
         });
     };
+
+    /**
+       * On page load
+      */
+    useEffect(() => {
+        props.setPage("search");
+    }, []);
 
     return (
         <div>

@@ -55,6 +55,7 @@ function View(props) {
       */
     useEffect(() => {
         loadMarker(searchParams.get('id'));
+        props.setPage("view");
     }, []);
 
     return (

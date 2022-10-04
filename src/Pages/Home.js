@@ -28,6 +28,7 @@ function Home(props) {
        * On page load
       */
     useEffect(() => {
+        props.setPage("home");
         loadMarkers();
     }, []);
 
