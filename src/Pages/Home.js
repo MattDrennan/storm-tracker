@@ -33,15 +33,19 @@ function Home(props) {
 
     return (
         <div>
-            {props.showDamageForm ? <DamageForm createMarker={props.createMarker} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} /> : null}
+            {props.showDamageForm ? <div className="top-content"><DamageForm createMarker={props.createMarker} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} /></div> : null}
 
-            <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+            <div className="content">
+                <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+            </div>
 
-            <AddressSearch setCoordinates={props.setCoordinates} />
+            <div className="content">
+                <AddressSearch setCoordinates={props.setCoordinates} />
+            </div>
 
-            <a href="/search">Advanced Search</a>
-
-            {props.markerInfo}
+            <div className="block-content">
+                {props.markerInfo}
+            </div>
         </div>
     );
 }

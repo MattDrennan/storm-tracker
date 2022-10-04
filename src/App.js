@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Axios from "axios";
 import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import Forgot from "./Pages/Forgot";
-import ChangePass from "./Pages/ChangePass";
 import Search from "./Pages/Search";
 import View from "./Pages/View";
 import moment from 'moment';
@@ -53,14 +49,26 @@ function App() {
     }).then((response) => {
       if (response.data.result) {
         setMarkerInfo(
-          <div>
+          <div className="content">
             <img src={"./images/" + response.data.result[0].image} />
             <h4>{response.data.result[0].damageName}</h4>
-            {moment(new Date(response.data.result[0].date)).format("YYYY-MM-DD HH:mm:ss")}
-            {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
-            {response.data.result[0].lat}, {response.data.result[0].lng}
-            {response.data.result[0].address}
-            <button onClick={() => setMarkerInfo(<div></div>)}>Close</button>
+            <p>
+              {moment(new Date(response.data.result[0].date)).format("YYYY-MM-DD HH:mm:ss")}
+            </p>
+
+            <p>
+              {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
+            </p>
+
+            <p>
+              {response.data.result[0].lat}, {response.data.result[0].lng}
+            </p>
+
+            <p>
+              {response.data.result[0].address}
+            </p>
+
+            <button onClick={() => setMarkerInfo(null)}>Close</button>
           </div>);
       }
     });
@@ -97,28 +105,6 @@ function App() {
     // Object into array
     setMarkers(markers => [...markers, object]);
   };
-
-  /**
-   * Handles authentication - Checks to see if user is logged in
-   */
-  const userAuthenticated = () => {
-    Axios.get("isUserAuth")
-      .then((response) => {
-        // Check if admin
-        if (response.data.accountType) {
-          //setAdminStatus(true);
-        }
-        setIsLoggedIn(true);
-      });
-  }
-
-  /**
-   * On page load
-  */
-  useEffect(() => {
-    // Keep user session active
-    userAuthenticated();
-  }, []);
 
   return (
     <BrowserRouter>

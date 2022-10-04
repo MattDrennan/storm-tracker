@@ -59,57 +59,104 @@ function Search(props) {
 
     return (
         <div>
-            <form method="POST" onSubmit={handleSubmit(submitSearch)}>
-                Date/Time Start:
-                <Controller
-                    control={control}
-                    name="dateStart"
-                    rules={{ required: "Please enter a date." }}
-                    defaultValue={new Date()}
-                    render={() => (
-                        <DateTimePicker
-                            onChange={onChange}
-                            value={value}
-                        />
-                    )}
-                />
+            <div className="space">
+            </div>
 
-                Date/Time End:
-                <Controller
-                    control={control}
-                    name="dateEnd"
-                    rules={{ required: "Please enter a date." }}
-                    defaultValue={new Date()}
-                    render={() => (
-                        <DateTimePicker
-                            onChange={onChange2}
-                            value={value2}
-                        />
-                    )}
-                />
+            <div className="block-content-top">
+                <form method="POST" onSubmit={handleSubmit(submitSearch)}>
+                    <div className="form-text">
+                        Date/Time Start:
+                    </div>
 
-                Code: <input type="text" {...register("code")} />
+                    <Controller
+                        control={control}
+                        name="dateStart"
+                        rules={{ required: "Please enter a date." }}
+                        defaultValue={new Date()}
+                        render={() => (
+                            <DateTimePicker
+                                onChange={onChange}
+                                value={value}
+                            />
+                        )}
+                    />
 
-                Name: <input type="text" {...register("damageName")} />
+                    <div className="form-text">
+                        Date/Time End:
+                    </div>
 
-                Address: <input type="text" {...register("address")} />
+                    <Controller
+                        control={control}
+                        name="dateEnd"
+                        rules={{ required: "Please enter a date." }}
+                        defaultValue={new Date()}
+                        render={() => (
+                            <DateTimePicker
+                                onChange={onChange2}
+                                value={value2}
+                            />
+                        )}
+                    />
 
-                Latitude: <input type="text" {...register("lat")} />
+                    <p>
+                        <div className="form-text">
+                            Code:
+                        </div>
 
-                Longitude: <input type="text" {...register("lng")} />
 
-                <input type="submit" value="Search!" />
-            </form>
+                        <input type="text" {...register("code")} />
+                    </p>
+
+                    <p>
+                        <div className="form-text">
+                            Name:
+                        </div>
+
+
+                        <input type="text" {...register("damageName")} />
+                    </p>
+
+                    <p>
+                        <div className="form-text">
+                            Address:
+                        </div>
+
+                        <input type="text" {...register("address")} />
+                    </p>
+
+                    <p>
+                        <div className="form-text">
+                            Latitude:
+                        </div>
+
+                        <input type="text" {...register("lat")} />
+                    </p>
+
+                    <p>
+                        <div className="form-text">
+                            Longitude:
+                        </div>
+
+                        <input type="text" {...register("lng")} />
+                    </p>
+
+                    <input type="submit" value="Search!" />
+                </form>
+            </div>
 
             <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
 
-            {props.markerInfo}
+            <div className="block-content">
+                {props.markerInfo}
+            </div>
 
-            {searchResults.map(function (object, i) {
-                return <div key={object.id}>
-                    {object.text}
-                </div>;
-            })}
+            <div className="block-content">
+                {searchResults.map(function (object, i) {
+                    return <div key={object.id}>
+                        {object.text}
+                    </div>;
+                })}
+            </div>
         </div>
     );
 }

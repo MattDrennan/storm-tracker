@@ -30,7 +30,7 @@ function AddressSearch(props) {
     return (
         <div>
             <form method="POST" onSubmit={handleSubmit(submitSearch)}>
-                <input type="text" {...register("addressSearch")} />
+                Address: <input type="text" {...register("addressSearch")} />
                 <input type="submit" value="Search!" />
             </form>
         </div>

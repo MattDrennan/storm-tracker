@@ -84,39 +84,62 @@ function DamageForm(props) {
     }, []);
 
     return (
-        <div>
-            <form method="POST" onSubmit={handleSubmit(damageSubmit)}>
-                Date:
-                <Controller
-                    control={control}
-                    name="date"
-                    rules={{ required: "Please enter a date." }}
-                    defaultValue={new Date()}
-                    render={() => (
-                        <DateTimePicker
-                            onChange={onChange}
-                            value={value}
+        <div className="block-content-top">
+            <div className="content">
+                <form method="POST" onSubmit={handleSubmit(damageSubmit)}>
+                    <p>
+                        <div className="form-text">
+                            Date:
+                        </div>
+                        
+                        <Controller
+                            control={control}
+                            name="date"
+                            rules={{ required: "Please enter a date." }}
+                            defaultValue={new Date()}
+                            render={() => (
+                                <DateTimePicker
+                                    onChange={onChange}
+                                    value={value}
+                                />
+                            )}
                         />
-                    )}
-                />
 
-                {errors.date && <span role="form-error">{errors.date.message}</span>}
+                        {errors.date && <span role="form-error">{errors.date.message}</span>}
+                    </p>
 
-                Damage Name: <input type="text" maxLength="20" {...register("damageName", { required: "Please enter the type of damage.", maxLength: { value: 20, message: "Too many characters." } })} />
+                    <p>
+                        <div className="form-text">
+                            Damage Name:
+                        </div>
 
-                {errors.damageName && <span role="form-error">{errors.damageName.message}</span>}
+                        <input type="text" maxLength="20" {...register("damageName", { required: "Please enter the type of damage.", maxLength: { value: 20, message: "Too many characters." } })} />
 
-                Damage Comments (Optional): <textarea {...register("comments")}></textarea>
+                        {errors.damageName && <span role="form-error">{errors.damageName.message}</span>}
+                    </p>
 
-                Icon:
+                    <p>
+                        <div className="form-text">
+                            Damage Comments (Optional):
+                        </div>
 
-                {icons}
+                        <textarea {...register("comments")}></textarea>
+                    </p>
 
-                {errors.iconPick && <span role="form-error">{errors.iconPick.message}</span>}
+                    <p>
+                        <div className="form-text">
+                            Pick an icon:
+                        </div>
 
-                <input type="submit" value="Add" />
-                <button onClick={cancelForm}>Cancel</button>
-            </form>
+                        {icons}
+
+                        {errors.iconPick && <span role="form-error">{errors.iconPick.message}</span>}
+                    </p>
+
+                    <input type="submit" value="Add" />
+                    <button onClick={cancelForm}>Cancel</button>
+                </form>
+            </div>
         </div>
     );
 }
