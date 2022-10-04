@@ -151,11 +151,13 @@ function Search(props) {
             </div>
 
             <div className="block-content">
-                {searchResults.map(function (object, i) {
-                    return <div key={object.id}>
-                        {object.text}
-                    </div>;
-                })}
+                <ol>
+                    {searchResults.map(function (object, i) {
+                        return <li key={object.id}>
+                            <a href={"/view?id=" + object.id}>{object.text}</a>
+                        </li>;
+                    })}
+                </ol>
             </div>
         </div>
     );

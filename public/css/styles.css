@@ -11381,3 +11381,17 @@ input[type=text] {
 .space {
   margin: 10px;
 }
+
+ol {
+  list-style-position: inside;
+}
+
+ol li {
+  margin: 10px;
+}
+
+.block-content-no-border {
+  display: block;
+  margin-top: 25px;
+  text-align: center;
+}

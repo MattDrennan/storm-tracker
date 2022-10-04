@@ -20,7 +20,6 @@ function View(props) {
      * Load marker information
      */
     const loadMarker = (e) => {
-        console.log(e);
         Axios.get("marker", {
             params: {
                 id: e,
@@ -28,13 +27,24 @@ function View(props) {
         }).then((response) => {
             if (response.data.result) {
                 setMarkerInfo(
-                    <div>
+                    <div className="block-content-no-border">
                         <img src={"./images/" + response.data.result[0].image} />
                         <h4>{response.data.result[0].damageName}</h4>
-                        {moment(new Date(response.data.result[0].date)).format("YYYY-MM-DD HH:mm:ss")}
-                        {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
-                        {response.data.result[0].lat}, {response.data.result[0].lng}
-                        {response.data.result[0].address}
+                        <p>
+                            {moment(new Date(response.data.result[0].date)).format("YYYY-MM-DD HH:mm:ss")}
+                        </p>
+
+                        <p>
+                            {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
+                        </p>
+
+                        <p>
+                            {response.data.result[0].lat}, {response.data.result[0].lng}
+                        </p>
+
+                        <p>
+                            {response.data.result[0].address}
+                        </p>
                     </div>);
             }
         });
