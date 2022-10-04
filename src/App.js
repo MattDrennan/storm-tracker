@@ -6,6 +6,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Forgot from "./Pages/Forgot";
 import ChangePass from "./Pages/ChangePass";
+import Search from "./Pages/Search";
 
 function App() {
   /**
@@ -43,11 +44,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accountType={accountType} setAccountType={setAccountType} />} />
-        <Route path="register" element={<Register isLoggedIn={isLoggedIn} />} />
-        <Route path="forgot" element={<Forgot isLoggedIn={isLoggedIn} />} />
-        <Route path="changepass" element={<ChangePass isLoggedIn={isLoggedIn} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );

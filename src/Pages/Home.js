@@ -40,6 +40,7 @@ function Home(props) {
                         {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
                         {response.data.result[0].lat}, {response.data.result[0].lng}
                         {response.data.result[0].address}
+                        <button onClick={() => setMarkerInfo(<div></div>)}>Close</button>
                     </div>);
             }
         });
@@ -156,6 +157,8 @@ function Home(props) {
                 </GoogleMapReact>
 
                 <AddressSearch setCoordinates={setCoordinates} />
+
+                <a href="/search">Advanced Search</a>
 
                 {markerInfo}
             </div>

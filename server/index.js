@@ -155,6 +155,21 @@ app.post("/marker", (req, res) => {
 });
 
 /**
+ * Gets specific marker from map
+*/
+app.get("/search", (req, res) => {
+    let sql = 'SELECT * FROM markers WHERE date >= ' + mysql.escape(req.query.dateStart) + ' AND date <= ' + mysql.escape(req.query.dateEnd) + ' AND code LIKE ' + mysql.escape("%" + req.query.code + "%") + ' AND lat LIKE ' + mysql.escape("%" + req.query.lat + "%") + ' AND lng LIKE ' + mysql.escape("%" + req.query.lng + "%") + ' AND IF(address IS NULL, "", address) LIKE ' + mysql.escape("%" + req.query.address + "%") + ' ORDER BY date DESC';
+    let query = conn.query(sql, (err, results) => {
+        if (err) throw err;
+        if (results.length > 0) {
+            res.json({ 'success': true, 'result': results });
+        } else {
+            res.json({ 'success': true, 'result': false });
+        }
+    });
+});
+
+/**
 * Logs in the user
 */
 app.post("/login", (req, res) => {
