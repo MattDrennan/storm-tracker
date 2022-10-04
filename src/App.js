@@ -7,6 +7,7 @@ import Register from "./Pages/Register";
 import Forgot from "./Pages/Forgot";
 import ChangePass from "./Pages/ChangePass";
 import Search from "./Pages/Search";
+import View from "./Pages/View";
 
 function App() {
   /**
@@ -46,6 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="search" element={<Search />} />
+        <Route path="view" element={<View />} />
       </Routes>
     </BrowserRouter>
   );
