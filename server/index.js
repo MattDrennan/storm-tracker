@@ -127,10 +127,25 @@ app.get("/markers", (req, res) => {
 });
 
 /**
+ * Gets specific marker from map
+*/
+app.get("/marker", (req, res) => {
+    let sql = 'SELECT * FROM markers WHERE id = ' + mysql.escape(req.query.id) + '';
+    let query = conn.query(sql, (err, results) => {
+        if (err) throw err;
+        if (results.length > 0) {
+            res.json({ 'success': true, 'result': results });
+        } else {
+            res.json({ 'success': true, 'result': false });
+        }
+    });
+});
+
+/**
  * Insert marker into database
 */
 app.post("/marker", (req, res) => {
-    let data = { date: req.body.date, damageName: req.body.damageName, image: req.body.image, comments: req.body.comments, lat: req.body.lat, lng: req.body.lng };
+    let data = { date: req.body.date, damageName: req.body.damageName, image: req.body.image, comments: req.body.comments, lat: req.body.lat, lng: req.body.lng, address: req.body.address };
 
     let sql = 'INSERT INTO markers SET ?';
     let query = conn.query(sql, data, (err, results) => {

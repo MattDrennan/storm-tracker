@@ -6,6 +6,7 @@ import Geocode from "react-geocode";
 import { useForm } from "react-hook-form";
 import DamageForm from "./Modules/DamageForm";
 import AddressSearch from "./Modules/AddressSearch";
+import moment from 'moment';
 
 Geocode.setApiKey("AIzaSyA7xKwuH6YRjBDnJfq_GsqGaLxRgSa-WKc");
 
@@ -17,16 +18,37 @@ function Home(props) {
     const location = useLocation();
 
     /**
+     * Marker information
+     */
+    const [markerInfo, setMarkerInfo] = useState(null);
+
+    /**
      * Marker Click Event
      */
     const clickMarker = (e) => {
-        console.log("aa");
+        Axios.get("marker", {
+            params: {
+                id: e,
+            }
+        }).then((response) => {
+            if (response.data.result) {
+                setMarkerInfo(
+                    <div>
+                        <img src={"./images/" + response.data.result[0].image} />
+                        <h4>{response.data.result[0].damageName}</h4>
+                        {moment(new Date(response.data.result[0].date)).format("YYYY-MM-DD HH:mm:ss")}
+                        {response.data.result[0].comments == undefined ? 'N/A' : response.data.result[0].comments}
+                        {response.data.result[0].lat}, {response.data.result[0].lng}
+                        {response.data.result[0].address}
+                    </div>);
+            }
+        });
     };
 
     /**
      * Make markers on map
      */
-    const Marker = ({ text, image }) => <div onClick={clickMarker}><img src={"./images/" + image} />{text}</div>;
+    const Marker = ({ id, text, image }) => <div onClick={() => clickMarker(id)}><img src={"./images/" + image} />{text}</div>;
 
     /**
      * Change coordinates of the map
@@ -68,8 +90,9 @@ function Home(props) {
     /**
      * Create marker
      */
-    const createMarker = (date, text, image, lat, lng) => {
+    const createMarker = (id, date, text, image, lat, lng) => {
         let object = {
+            id: id,
             date: date,
             text: text,
             image: image,
@@ -88,7 +111,7 @@ function Home(props) {
         Axios.get("markers").then((response) => {
             if (response.data.result) {
                 for (let i = 0; i <= response.data.result.length - 1; i++) {
-                    createMarker(response.data.result[i].date, response.data.result[i].damageName, response.data.result[i].image, response.data.result[i].lat, response.data.result[i].lng);
+                    createMarker(response.data.result[i].id, response.data.result[i].date, response.data.result[i].damageName, response.data.result[i].image, response.data.result[i].lat, response.data.result[i].lng);
                 }
             }
         });
@@ -121,16 +144,20 @@ function Home(props) {
 
                     {markers.map(function (object, i) {
                         return <Marker
+                            id={object.id}
                             lat={object.lat}
                             lng={object.lng}
                             text={object.text}
                             image={object.image}
+                            key={object.id}
                         />;
                     })}
 
                 </GoogleMapReact>
 
                 <AddressSearch setCoordinates={setCoordinates} />
+
+                {markerInfo}
             </div>
         </div>
     );

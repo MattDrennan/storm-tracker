@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import moment from 'moment';
 import DateTimePicker from 'react-datetime-picker';
+import Geocode from "react-geocode";
 
 function DamageForm(props) {
     const { register, handleSubmit, control, formState: { errors } } = useForm();
@@ -16,20 +17,29 @@ function DamageForm(props) {
      * Handle Damage Form Submit
      */
     const damageSubmit = (e) => {
-        // Insert marker into database
-        Axios.post("marker", {
-            date: moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"),
-            damageName: e.damageName,
-            image: e.iconPick,
-            comments: e.comments,
-            lat: props.savedCoordinates.lat,
-            lng: props.savedCoordinates.lng,
-        }).then((response) => {
-            console.log(response);
-        });
+        // Get address from lat / lng
+        Geocode.fromLatLng(props.savedCoordinates.lat, props.savedCoordinates.lng).then(
+            (geoResponse) => {
+                const address = geoResponse.results[0].formatted_address;
 
-        props.createMarker(moment(new Date(value)).format("YYYY-MM-DD HH:MM:ss"), e.damageName, e.iconPick, props.savedCoordinates.lat, props.savedCoordinates.lng);
-        props.setShowDamageForm(false);
+                // Insert marker into database
+                Axios.post("marker", {
+                    date: moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"),
+                    damageName: e.damageName,
+                    image: e.iconPick,
+                    comments: e.comments,
+                    lat: props.savedCoordinates.lat,
+                    lng: props.savedCoordinates.lng,
+                    address: address,
+                }).then((response) => {
+                    props.createMarker(response.data.response.insertId, moment(new Date(value)).format("YYYY-MM-DD HH:MM:ss"), e.damageName, e.iconPick, props.savedCoordinates.lat, props.savedCoordinates.lng);
+                    props.setShowDamageForm(false);
+                });
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
     };
 
     /**
