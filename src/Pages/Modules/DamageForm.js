@@ -87,7 +87,7 @@ function DamageForm(props) {
         <div className="block-content-top">
             <div className="content">
                 <form method="POST" onSubmit={handleSubmit(damageSubmit)}>
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Date:
                         </div>
@@ -106,9 +106,9 @@ function DamageForm(props) {
                         />
 
                         {errors.date && <span role="form-error">{errors.date.message}</span>}
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Damage Name:
                         </div>
@@ -116,17 +116,17 @@ function DamageForm(props) {
                         <input type="text" maxLength="20" {...register("damageName", { required: "Please enter the type of damage.", maxLength: { value: 20, message: "Too many characters." } })} />
 
                         {errors.damageName && <span role="form-error">{errors.damageName.message}</span>}
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Damage Comments (Optional):
                         </div>
 
                         <textarea {...register("comments")}></textarea>
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Pick an icon:
                         </div>
@@ -134,7 +134,7 @@ function DamageForm(props) {
                         {icons}
 
                         {errors.iconPick && <span role="form-error">{errors.iconPick.message}</span>}
-                    </p>
+                    </div>
 
                     <input type="submit" value="Add" />
                     <button onClick={cancelForm}>Cancel</button>

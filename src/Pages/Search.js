@@ -105,47 +105,47 @@ function Search(props) {
                         )}
                     />
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Code:
                         </div>
 
 
                         <input type="text" {...register("code")} />
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Name:
                         </div>
 
 
                         <input type="text" {...register("damageName")} />
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Address:
                         </div>
 
                         <input type="text" {...register("address")} />
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Latitude:
                         </div>
 
                         <input type="text" {...register("lat")} />
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="paragraph">
                         <div className="form-text">
                             Longitude:
                         </div>
 
                         <input type="text" {...register("lng")} />
-                    </p>
+                    </div>
 
                     <input type="submit" value="Search!" />
                 </form>

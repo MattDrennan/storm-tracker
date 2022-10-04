@@ -11395,3 +11395,7 @@ ol li {
   margin-top: 25px;
   text-align: center;
 }
+
+.paragraph {
+  display: block;
+}
