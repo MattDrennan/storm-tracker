@@ -118,7 +118,7 @@ app.get("/marker", (req, res) => {
  * Insert marker into database
 */
 app.post("/marker", (req, res) => {
-    let data = { date: req.body.date, damageName: req.body.damageName, image: req.body.image, comments: req.body.comments, lat: req.body.lat, lng: req.body.lng, address: req.body.address };
+    let data = { date: req.body.date, damageName: req.body.damageName, code: req.body.code, image: req.body.image, comments: req.body.comments, lat: req.body.lat, lng: req.body.lng, address: req.body.address };
 
     let sql = 'INSERT INTO markers SET ?';
     let query = conn.query(sql, data, (err, results) => {

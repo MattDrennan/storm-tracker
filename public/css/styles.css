@@ -11382,6 +11382,11 @@ input[type=text] {
   width: 400px;
 }
 
+textarea {
+  width: 400px;
+  height: 100px;
+}
+
 .form-text {
   margin-bottom: 5px;
 }

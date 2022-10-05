@@ -26,6 +26,7 @@ function DamageForm(props) {
                 Axios.post("marker", {
                     date: moment(new Date(value)).format("YYYY-MM-DD HH:mm:ss"),
                     damageName: e.damageName,
+                    code: e.code,
                     image: e.iconPick,
                     comments: e.comments,
                     lat: props.savedCoordinates.lat,
@@ -124,6 +125,14 @@ function DamageForm(props) {
                         </div>
 
                         <textarea {...register("comments")}></textarea>
+                    </div>
+
+                    <div className="paragraph">
+                        <div className="form-text">
+                            Code (Optional):
+                        </div>
+
+                        <input type="text" {...register("code")} />
                     </div>
 
                     <div className="paragraph">

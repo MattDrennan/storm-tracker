@@ -4,6 +4,7 @@ import Axios from "axios";
 import Home from "./Pages/Home";
 import Search from "./Pages/Search";
 import View from "./Pages/View";
+import About from "./Pages/About";
 import moment from 'moment';
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
         <div className="list-group list-group-flush">
           <a className={page == "home" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/">Dashboard</a>
           <a className={page == "search" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/search">Search</a>
+          <a className={page == "about" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/about">About</a>
         </div>
       </div>
       <div id="page-content-wrapper">
@@ -121,6 +123,7 @@ function App() {
               <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
                 <li className={page == "home" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/">Dashboard</a></li>
                 <li className={page == "search" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/search">Search</a></li>
+                <li className={page == "about" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/about">About</a></li>
               </ul>
             </div>
           </div>
@@ -131,6 +134,7 @@ function App() {
               <Route path="/" element={<Home page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
               <Route path="search" element={<Search page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
               <Route path="view" element={<View page={page} setPage={setPage} />} />
+              <Route path="about" element={<About page={page} setPage={setPage} />} />
             </Routes>
           </BrowserRouter>
         </div>
