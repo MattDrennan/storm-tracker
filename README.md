@@ -6,17 +6,13 @@ A base website project with login, register, logout, forgot password, and change
 1. Add a .env file in the server folder with the following:
 
 ```
-DB_SERVER=DATABASE SERVER
-DB_USER=DATABASE USERNAME
-DB_PASSWORD=DATABASE PASSWORD
-DB=DATABASE NAME HERE
-DB_PORT=PORT NUMBER FOR DATABASE HERE
-EMAIL_SERVER=EMAIL SERVER HERE
-EMAIL_USER=EMAIL USERNAME
-EMAIL_PASS=EMAIL PASSWORD
-EMAIL_PORT=EMAIL PORT
-EMAIL_FROM=EMAIL SEND FROM ADDRESS
-SESSION_SECRET=PASSWORD FOR SESSIONS (MAKE THIS WHAT YOU WANT, KEEP SECRET)
+DB_SERVER=localhost
+DB_USER=root
+DB_PASSWORD=root
+DB=storm
+DB_PORT=8889
+SANDBOX=1
+BASE_URL=https://stormdamagemap.com:8442
 ```
 
 2. Add a .env file in the root directory with the following:

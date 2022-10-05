@@ -7,49 +7,22 @@ const app = express();
 var mysql = require('mysql');
 require('dotenv').config();
 const cors = require('cors');
-var nodemailer = require('nodemailer');
+const https = require('https');
+const fs = require('fs');
 
 /**
  * Prevent issues with sending requests
 */
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://stormdamagemap.com", "https://www.stormdamagemap.com"],
     method: ["GET", "POST"],
     credentials: true,
 }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/**
- * Set up session
-*/
-
-app.use(session({
-    key: "userID",
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 60 * 60 * 24,
-    }
-}));
-
 app.use(cookieParser());
-
-/**
- * Connect to mail server
- */
-
-var transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_SERVER,
-    port: process.env.EMAIL_PORT,
-    secure: false,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-});
 
 /**
  * Connect to MySQL server
@@ -148,3 +121,25 @@ app.get("/search", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
+
+if (process.env.SANDBOX == 0) {
+    /**
+     * Encrypt
+     */
+
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/stormdamagemap.com/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/stormdamagemap.com/cert.pem', 'utf8');
+    const ca = fs.readFileSync('/etc/letsencrypt/live/stormdamagemap.com/chain.pem', 'utf8');
+
+    const credentials = {
+        key: privateKey,
+        cert: certificate,
+        ca: ca
+    };
+
+    const httpsServer = https.createServer(credentials, app);
+
+    httpsServer.listen(8442, () => {
+        console.log('HTTPS Server running on port 8442');
+    });
+}
