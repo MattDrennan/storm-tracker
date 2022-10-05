@@ -38,6 +38,9 @@ function Home(props) {
 
             <div className="content">
                 <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+                <p>
+                    <i>Showing last two weeks, use search for filtering options.</i>
+                </p>
             </div>
 
             <div className="content">

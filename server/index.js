@@ -88,7 +88,7 @@ app.get("/geticons", (req, res) => {
  * Gets markers for map
 */
 app.get("/markers", (req, res) => {
-    let sql = 'SELECT * FROM markers';
+    let sql = 'SELECT * FROM markers WHERE date >= DATE_SUB(now(),INTERVAL 2 WEEK)';
     let query = conn.query(sql, (err, results) => {
         if (err) throw err;
         if (results.length > 0) {
