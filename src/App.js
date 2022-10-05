@@ -104,7 +104,7 @@ function App() {
   return (
     <div className="d-flex" id="wrapper">
       <div className="border-end bg-white" id="sidebar-wrapper">
-        <div className="sidebar-heading border-bottom bg-light">Storm Damage Map</div>
+        <div className="sidebar-heading border-bottom bg-light"><img src="./images/logo.png" /> Storm Damage Map</div>
         <div className="list-group list-group-flush">
           <a className={page == "home" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/">Dashboard</a>
           <a className={page == "search" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/search">Search</a>
@@ -113,7 +113,7 @@ function App() {
       <div id="page-content-wrapper">
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
           <div className="container-fluid">
-            <button className="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+            <button className="btn btn-primary" onClick={() => document.body.classList.toggle('sb-sidenav-toggled')}>Toggle Menu</button>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
               aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>

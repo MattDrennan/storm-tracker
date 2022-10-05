@@ -158,13 +158,14 @@ function Search(props) {
             </div>
 
             <div className="block-content">
+                {searchResults.length > 0 &&
                 <ol>
                     {searchResults.map(function (object, i) {
                         return <li key={object.id}>
                             <a href={"/view?id=" + object.id}>{object.text}</a>
                         </li>;
                     })}
-                </ol>
+                </ol>}
             </div>
         </div>
     );
