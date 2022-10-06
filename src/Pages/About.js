@@ -25,6 +25,15 @@ function About(props) {
                 Storm Damage Map is open for anyone to use and does not need an account to be used; allowing for ease of use on a large scale.
             </p>
 
+            <h3>How to use Storm Damage Map?</h3>
+            <p>
+                To add storm damage to the map, simply navigate to the dashboard. You will see a map. Press on the map and a red flag will display where you pressed on the map. Above the map, you will see a form to input information about the damage. Once you complete the form, press "Add". The damage will now display on the map.
+            </p>
+
+            <p>
+                To search storm damage, navigate to the search page. On the search page, fill in the form to narrow your search results. Not all fields need to be completed to search data.
+            </p>
+
             <h3>Questions? Suggestions? Need Support?</h3>
             <p>
                 Please e-mail us at: <a href="mailto: support@drennansoftware.com">support@drennansoftware.com</a>
