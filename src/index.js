@@ -8,6 +8,8 @@ import Axios from "axios";
 Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 Axios.defaults.withCredentials = true;
 
+//Axios.defaults.baseURL = 'https://stormdamagemap.com:8442'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <App />
