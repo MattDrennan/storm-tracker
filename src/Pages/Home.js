@@ -34,10 +34,10 @@ function Home(props) {
 
     return (
         <div>
-            {props.showDamageForm ? <div className="top-content"><DamageForm createMarker={props.createMarker} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} /></div> : null}
+            {props.showDamageForm ? <div className="top-content"><DamageForm setTempMarker={props.setTempMarker} createMarker={props.createMarker} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} /></div> : null}
 
             <div className="content">
-                <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+                <Map page={props.page} setTempMarker={props.setTempMarker} tempMarker={props.tempMarker} markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
                 <p>
                     <i>Showing last two weeks, use search for filtering options.</i>
                 </p>

@@ -1,10 +1,7 @@
-import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from 'google-map-react';
 
 function Map(props) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
     /**
      * Default properties for Google Maps
      */
@@ -29,6 +26,15 @@ function Map(props) {
                         lat: e.lat,
                         lng: e.lng,
                     });
+
+                    // Only show temp icon on dashboard
+                    if (props.page == "home") {
+                        props.setTempMarker({
+                            show: true,
+                            lat: e.lat,
+                            lng: e.lng,
+                        });
+                    }
                 }}>
 
                 {props.markers.map(function (object, i) {
@@ -41,6 +47,15 @@ function Map(props) {
                         key={object.id}
                     />;
                 })}
+
+                {props.tempMarker.show && (
+                    <props.Marker
+                        lat={props.tempMarker.lat}
+                        lng={props.tempMarker.lng}
+                        text=""
+                        image="tempicon.png"
+                    />
+                )}
 
             </GoogleMapReact>
         </div>

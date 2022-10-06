@@ -151,7 +151,7 @@ function Search(props) {
                 </form>
             </div>
 
-            <Map markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
+            <Map page={props.page} setTempMarker={props.setTempMarker} tempMarker={props.tempMarker} markers={props.markers} Marker={props.Marker} coordinates={props.coordinates} setCoordinates={props.setCoordinates} savedCoordinates={props.savedCoordinates} setSavedCoordinates={props.setSavedCoordinates} setShowDamageForm={props.setShowDamageForm} />
 
             <div className="block-content">
                 {props.markerInfo}

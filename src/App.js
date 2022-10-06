@@ -102,14 +102,23 @@ function App() {
     setMarkers(markers => [...markers, object]);
   };
 
+  /**
+   * Show temp marker
+   */
+  const [tempMarker, setTempMarker] = useState({
+    show: false,
+    lat: 0,
+    lng: 0,
+  });
+
   return (
     <div className="d-flex" id="wrapper">
       <div className="border-end bg-white" id="sidebar-wrapper">
         <div className="sidebar-heading border-bottom bg-light"><img src="./images/logo.png" /> Storm Damage Map</div>
         <div className="list-group list-group-flush">
-          <a className={page == "home" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/">Dashboard</a>
-          <a className={page == "search" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/search">Search</a>
-          <a className={page == "about" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3' } href="/about">About</a>
+          <a className={page == "home" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/">Dashboard</a>
+          <a className={page == "search" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/search">Search</a>
+          <a className={page == "about" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/about">About</a>
         </div>
       </div>
       <div id="page-content-wrapper">
@@ -121,9 +130,9 @@ function App() {
               aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-                <li className={page == "home" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/">Dashboard</a></li>
-                <li className={page == "search" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/search">Search</a></li>
-                <li className={page == "about" ? 'nav-item active' : 'nav-item' }><a className="nav-link" href="/about">About</a></li>
+                <li className={page == "home" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/">Dashboard</a></li>
+                <li className={page == "search" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/search">Search</a></li>
+                <li className={page == "about" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/about">About</a></li>
               </ul>
             </div>
           </div>
@@ -131,8 +140,8 @@ function App() {
         <div className="container-fluid">
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
-              <Route path="search" element={<Search page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
+              <Route path="/" element={<Home setTempMarker={setTempMarker} tempMarker={tempMarker} page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
+              <Route path="search" element={<Search setTempMarker={setTempMarker} tempMarker={tempMarker} page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
               <Route path="view" element={<View page={page} setPage={setPage} />} />
               <Route path="about" element={<About page={page} setPage={setPage} />} />
             </Routes>

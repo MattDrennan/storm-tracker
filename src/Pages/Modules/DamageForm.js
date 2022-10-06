@@ -75,6 +75,11 @@ function DamageForm(props) {
      */
     const cancelForm = (e) => {
         props.setShowDamageForm(false);
+        props.setTempMarker({
+            show: false,
+            lat: 0,
+            lng: 0,
+        });
     };
 
     /**
