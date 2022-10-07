@@ -11382,6 +11382,11 @@ input[type=text] {
   width: 400px;
 }
 
+select {
+  width: 400px;
+  text-align: center;
+}
+
 textarea {
   width: 400px;
   height: 100px;
@@ -11411,4 +11416,9 @@ ol li {
 
 .paragraph {
   display: block;
+}
+
+[role=form-error] {
+  display: block;
+  color: red;
 }

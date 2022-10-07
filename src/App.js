@@ -4,8 +4,10 @@ import Axios from "axios";
 import Home from "./Pages/Home";
 import Search from "./Pages/Search";
 import View from "./Pages/View";
+import Codes from "./Pages/Codes";
 import About from "./Pages/About";
 import moment from 'moment';
+import CodePassword from "./Pages/Modules/CodePassword";
 
 function App() {
   /**
@@ -64,15 +66,23 @@ function App() {
               {response.data.result[0].address}
             </p>
 
-            <button onClick={() => setMarkerInfo(null)}>Close</button>
-          </div>);
+            {response.data.result[0].code.length > 0 && (
+              <p>
+                <CodePassword id={response.data.result[0].id} code={response.data.result[0].code} text={response.data.result[0].complete == 0 ? 'Mark Complete' : 'Mark Incomplete'} setMarkerInfo={setMarkerInfo} />
+              </p>
+            )}
+
+            <p>
+              <button onClick={() => setMarkerInfo(null)}>Close</button>
+            </p>
+          </div >);
       }
     });
   };
 
   /**
- * Make markers on map
- */
+  * Make markers on map
+  */
   const Marker = ({ id, text, image }) => <div onClick={() => clickMarker(id)}><img src={"./images/" + image} />{text}</div>;
 
   /**
@@ -117,6 +127,7 @@ function App() {
         <div className="sidebar-heading border-bottom bg-light"><img src="./images/logo.png" /> Storm Damage Map</div>
         <div className="list-group list-group-flush">
           <a className={page == "home" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/">Dashboard</a>
+          <a className={page == "codes" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/codes">Codes</a>
           <a className={page == "search" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/search">Search</a>
           <a className={page == "about" ? 'list-group-item list-group-item-action list-group-item-light p-3 active' : 'list-group-item list-group-item-action list-group-item-light p-3'} href="/about">About</a>
         </div>
@@ -131,6 +142,7 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
                 <li className={page == "home" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/">Dashboard</a></li>
+                <li className={page == "codes" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/codes">Codes</a></li>
                 <li className={page == "search" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/search">Search</a></li>
                 <li className={page == "about" ? 'nav-item active' : 'nav-item'}><a className="nav-link" href="/about">About</a></li>
               </ul>
@@ -143,6 +155,7 @@ function App() {
               <Route path="/" element={<Home setTempMarker={setTempMarker} tempMarker={tempMarker} page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
               <Route path="search" element={<Search setTempMarker={setTempMarker} tempMarker={tempMarker} page={page} setPage={setPage} createMarker={createMarker} markerInfo={markerInfo} markers={markers} setMarkers={setMarkers} Marker={Marker} showDamageForm={showDamageForm} setShowDamageForm={setShowDamageForm} coordinates={coordinates} setCoordinates={setCoordinates} savedCoordinates={savedCoordinates} setSavedCoordinates={setSavedCoordinates} />} />
               <Route path="view" element={<View page={page} setPage={setPage} />} />
+              <Route path="codes" element={<Codes page={page} setPage={setPage} />} />
               <Route path="about" element={<About page={page} setPage={setPage} />} />
             </Routes>
           </BrowserRouter>

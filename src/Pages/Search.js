@@ -36,6 +36,7 @@ function Search(props) {
                 address: e.address,
                 lat: e.lat,
                 lng: e.lng,
+                status: e.status,
             }
         }).then((response) => {
             if (response.data.result) {
@@ -116,6 +117,18 @@ function Search(props) {
 
                     <div className="paragraph">
                         <div className="form-text">
+                            Status:
+                        </div>
+
+
+                        <select type="text" {...register("status")} defaultValue="0">
+                            <option value="0">Incomplete</option>
+                            <option value="1">Complete</option>
+                        </select>
+                    </div>
+
+                    <div className="paragraph">
+                        <div className="form-text">
                             Name:
                         </div>
 
@@ -159,13 +172,13 @@ function Search(props) {
 
             <div className="block-content">
                 {searchResults.length > 0 &&
-                <ol>
-                    {searchResults.map(function (object, i) {
-                        return <li key={object.id}>
-                            <a href={"/view?id=" + object.id}>{object.text}</a>
-                        </li>;
-                    })}
-                </ol>}
+                    <ol>
+                        {searchResults.map(function (object, i) {
+                            return <li key={object.id}>
+                                <a href={"/view?id=" + object.id}>{object.text}</a>
+                            </li>;
+                        })}
+                    </ol>}
             </div>
         </div>
     );

@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 
 function About(props) {
@@ -28,6 +27,10 @@ function About(props) {
             <h3>How to use Storm Damage Map?</h3>
             <p>
                 To add storm damage to the map, simply navigate to the dashboard. You will see a map. Press on the map and a red flag will display where you pressed on the map. Above the map, you will see a form to input information about the damage. Once you complete the form, press "Add". The damage will now display on the map.
+            </p>
+
+            <p>
+                To add codes, navigate to the codes page. Register a code name and password. This will be used to allow you to mark storm damage as complete or incomplete, and prevent unauthorized users from modifying your data.
             </p>
 
             <p>
