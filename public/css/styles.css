@@ -11422,3 +11422,8 @@ ol li {
   display: block;
   color: red;
 }
+
+.marker {
+  position: absolute !important;
+  transform: translate(-50%, -50%) !important;
+}

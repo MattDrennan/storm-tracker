@@ -83,7 +83,7 @@ function App() {
   /**
   * Make markers on map
   */
-  const Marker = ({ id, text, image }) => <div onClick={() => clickMarker(id)}><img src={"./images/" + image} />{text}</div>;
+  const Marker = ({ id, text, image }) => <div className="marker" onClick={() => clickMarker(id)}><img src={"./images/" + image} />{text}</div>;
 
   /**
    * Show Damage Form
