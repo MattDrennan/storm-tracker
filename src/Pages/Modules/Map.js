@@ -16,7 +16,7 @@ function Map(props) {
     return (
         <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyA7xKwuH6YRjBDnJfq_GsqGaLxRgSa-WKc" }}
+                bootstrapURLKeys={{ key: "[CHANGE TO GOOGLE MAP API]" }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 center={props.coordinates}
