@@ -1,5 +1,5 @@
 # storm-tracker
-A base project to track storm damage.
+A base project, utilizing ReactJS and Node, to track storm damage.
 
 # How to setup
 
