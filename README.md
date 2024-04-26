@@ -1,5 +1,5 @@
 # storm-tracker
-A base website project with login, register, logout, forgot password, and change password using React and NodeJS.
+A base project to track storm damage.
 
 # How to setup
 
