@@ -1,4 +1,4 @@
-# react-boiler-plate
+# storm-tracker
 A base website project with login, register, logout, forgot password, and change password using React and NodeJS.
 
 # How to setup
